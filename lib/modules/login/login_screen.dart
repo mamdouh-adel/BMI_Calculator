@@ -1,4 +1,8 @@
+import 'package:bmi_calculator/modules/bmi/bmi_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:toast/toast.dart';
+
+import '../../shared/components/components.dart';
 
 class LoginScreen extends StatelessWidget {
   final _emailController = TextEditingController();
@@ -8,10 +12,11 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ToastContext().init(context);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text("Login"),
+        backgroundColor: Colors.blue,
+        title: getTitleText(),
       ),
       body: SingleChildScrollView(
         child: Center(
@@ -41,8 +46,6 @@ class LoginScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(20),
                     ),
                   ),
-                  onFieldSubmitted: (value) => print(value),
-                  onChanged: (value) => print(value),
                 ),
                 const SizedBox(
                   height: 15,
@@ -59,8 +62,6 @@ class LoginScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(20),
                     ),
                   ),
-                  onFieldSubmitted: (value) => print(value),
-                  onChanged: (value) => print(value),
                 ),
                 const SizedBox(
                   height: 32,
@@ -70,14 +71,22 @@ class LoginScreen extends StatelessWidget {
                   decoration: const BoxDecoration(
                     borderRadius:
                         BorderRadiusDirectional.all(Radius.circular(20)),
-                    color: Colors.deepPurple,
+                    color: Colors.blue,
                   ),
                   child: MaterialButton(
                       textColor: Colors.white,
                       onPressed: () {
-                        print("Login....................");
-                        print(_emailController.text);
-                        print(_passwordController.text);
+                        if (_emailController.text == "ezz" &&
+                            _passwordController.text == "ezz") {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const BMIScreen()));
+                        } else {
+                          Toast.show("Invalid Email Address or Password",
+                              duration: Toast.lengthShort,
+                              gravity: Toast.bottom);
+                        }
                       },
                       child: const Text(
                         "LOGIN",

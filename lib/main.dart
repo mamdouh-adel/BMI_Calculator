@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:bmi_calculator/bmi_screen.dart';
+import 'modules/login/login_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,13 +12,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'BMI Calculator',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
-      home: const BMIScreen(),
+      home: LoginScreen(),
     );
   }
 }

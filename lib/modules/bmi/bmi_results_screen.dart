@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../shared/components/components.dart';
+
 class BMIResultsScreen extends StatelessWidget {
   final String gender;
   final String result;
@@ -17,10 +19,7 @@ class BMIResultsScreen extends StatelessWidget {
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.white),
         backgroundColor: Colors.blue,
-        title: const Text(
-          "BMI Result",
-          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
-        ),
+        title: getTitleText()
       ),
       body: Center(
         child: Container(

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../models/user_model.dart';
+
 class UsersRepo {
   static List<UserModel> getUsers() {
     List<UserModel> users = [];
@@ -20,14 +22,6 @@ class UsersRepo {
 
     return users;
   }
-}
-
-class UserModel {
-  final int id;
-  final String name;
-  final String phone;
-
-  UserModel({required this.id, required this.name, required this.phone});
 }
 
 class UsersScreen extends StatelessWidget {

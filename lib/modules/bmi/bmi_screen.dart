@@ -1,9 +1,10 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:bmi_calculator/bmi_results_screen.dart';
+import 'package:bmi_calculator/modules/bmi/bmi_results_screen.dart';
 
-import 'constants.dart';
+import '../../shared/components/components.dart';
+import '../../shared/components/constants.dart';
 
 class BMIScreen extends StatefulWidget {
   const BMIScreen({super.key});
@@ -25,12 +26,11 @@ class _BMIScreenState extends State<BMIScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blue,
-        title: const Text(
-          "BMI Calculator",
-          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
-        ),
-      ),
+          leading: const BackButton(
+            color: Colors.white,
+          ),
+          backgroundColor: Colors.blue,
+          title: getTitleText()),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -93,11 +93,13 @@ class _BMIScreenState extends State<BMIScreen> {
                 const SizedBox(
                   height: 15.0,
                 ),
-                Text(
-                  gender,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 26.0,
+                Flexible(
+                  child: Text(
+                    gender,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 26.0,
+                    ),
                   ),
                 )
               ],
@@ -120,47 +122,57 @@ class _BMIScreenState extends State<BMIScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text(
-                "HEIGHT",
-                style: TextStyle(
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black),
+              const Flexible(
+                child: Text(
+                  "HEIGHT",
+                  style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black),
+                ),
               ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.baseline,
-                mainAxisAlignment: MainAxisAlignment.center,
-                textBaseline: TextBaseline.alphabetic,
-                children: [
-                  Text(
-                    "${_currentHeight.round()}",
-                    style: const TextStyle(
-                        fontSize: 40,
-                        fontWeight: FontWeight.w900,
-                        color: Colors.black),
-                  ),
-                  const SizedBox(
-                    width: 3,
-                  ),
-                  const Text(
-                    "CM",
-                    style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black),
-                  ),
-                ],
+              Flexible(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.baseline,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  textBaseline: TextBaseline.alphabetic,
+                  children: [
+                    Flexible(
+                      child: Text(
+                        "${_currentHeight.round()}",
+                        style: const TextStyle(
+                            fontSize: 40,
+                            fontWeight: FontWeight.w900,
+                            color: Colors.black),
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 3,
+                    ),
+                    const Flexible(
+                      child: Text(
+                        "CM",
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-              Slider(
-                  value: _currentHeight,
-                  min: minSlider,
-                  max: maxSlider,
-                  activeColor: Colors.blue,
-                  onChanged: (value) {
-                    setState(() {
-                      _currentHeight = value;
-                    });
-                  }),
+              Flexible(
+                child: Slider(
+                    value: _currentHeight,
+                    min: minSlider,
+                    max: maxSlider,
+                    activeColor: Colors.blue,
+                    onChanged: (value) {
+                      setState(() {
+                        _currentHeight = value;
+                      });
+                    }),
+              ),
             ],
           ),
         ),
@@ -183,47 +195,53 @@ class _BMIScreenState extends State<BMIScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(
-                title,
-                style: const TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black),
+              Flexible(
+                child: Text(
+                  title,
+                  style: const TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black),
+                ),
               ),
-              Text(
-                "$initialValue",
-                style: const TextStyle(
-                    fontSize: 40,
-                    fontWeight: FontWeight.w900,
-                    color: Colors.black),
+              Flexible(
+                child: Text(
+                  "$initialValue",
+                  style: const TextStyle(
+                      fontSize: 40,
+                      fontWeight: FontWeight.w900,
+                      color: Colors.black),
+                ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  FloatingActionButton(
-                    onPressed: decreaseValue,
-                    backgroundColor: Colors.blue,
-                    foregroundColor: Colors.white,
-                    heroTag: "$title-",
-                    mini: true,
-                    shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(20))),
-                    child: const Icon(Icons.remove),
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  FloatingActionButton(
-                    onPressed: increaseValue,
-                    backgroundColor: Colors.blue,
-                    foregroundColor: Colors.white,
-                    heroTag: "$title+",
-                    mini: true,
-                    shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(20))),
-                    child: const Icon(Icons.add),
-                  ),
-                ],
+              Flexible(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    FloatingActionButton(
+                      onPressed: decreaseValue,
+                      backgroundColor: Colors.blue,
+                      foregroundColor: Colors.white,
+                      heroTag: "$title-",
+                      mini: true,
+                      shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(20))),
+                      child: const Icon(Icons.remove),
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    FloatingActionButton(
+                      onPressed: increaseValue,
+                      backgroundColor: Colors.blue,
+                      foregroundColor: Colors.white,
+                      heroTag: "$title+",
+                      mini: true,
+                      shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(20))),
+                      child: const Icon(Icons.add),
+                    ),
+                  ],
+                ),
               )
             ],
           ),
