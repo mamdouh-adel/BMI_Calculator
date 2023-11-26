@@ -4,12 +4,19 @@ import 'package:toast/toast.dart';
 
 import '../../shared/components/components.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final formKey = GlobalKey<FormState>();
-
-  LoginScreen({super.key});
+  bool _isPassword = true;
+  IconData _passwordSuffixIcon = Icons.visibility;
 
   @override
   Widget build(BuildContext context) {
@@ -58,8 +65,17 @@ class LoginScreen extends StatelessWidget {
                       controller: _passwordController,
                       textInputType: TextInputType.visiblePassword,
                       prefix: Icons.lock,
-                      suffix: Icons.remove_red_eye,
+                      suffixIcon: _passwordSuffixIcon,
                       label: "Password",
+                      isPassword: _isPassword,
+                      passwordVisibilityAction: () {
+                        setState(() {
+                          _isPassword = !_isPassword;
+                          _passwordSuffixIcon = _isPassword
+                              ? Icons.visibility
+                              : Icons.visibility_off;
+                        });
+                      },
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return "Password cannot be empty";

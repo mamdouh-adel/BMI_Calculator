@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 Widget getTitleText(
         {String text = "BMI Calculator",
@@ -16,14 +15,19 @@ Widget getDefaultTextField(
         required IconData prefix,
         required String label,
         bool isPassword = false,
+        IconData? suffixIcon,
         Function? validator,
-        IconData? suffix}) =>
+        passwordVisibilityAction}) =>
     TextFormField(
       controller: controller,
       keyboardType: textInputType,
+      obscureText: isPassword,
       decoration: InputDecoration(
         prefixIcon: Icon(prefix),
-        suffix: suffix != null ? Icon(suffix) : null,
+        suffix: suffixIcon != null
+            ? IconButton(
+                icon: Icon(suffixIcon), onPressed: passwordVisibilityAction)
+            : null,
         labelText: (label),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(20),
